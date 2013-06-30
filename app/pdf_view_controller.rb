@@ -27,8 +27,9 @@ class PDFViewController < UIViewController
     )
 
     # somehow this prevents a crash
-    @pageViewController.dataSource.method(:'pageViewController:viewControllerAfterViewController')
-    @pageViewController.dataSource.method(:'pageViewController:viewControllerBeforeViewController')
+    @pageViewController.dataSource.method(:to_s)
+    # @pageViewController.dataSource.method(:'pageViewController:viewControllerAfterViewController')
+    # @pageViewController.dataSource.method(:'pageViewController:viewControllerBeforeViewController')
   end
 
 end
@@ -59,7 +60,7 @@ class PDFViewDataSource # UIPageViewControllerDataSource
 
   def currentPageViewController
     page = CGPDFDocumentGetPage @document, @currentPage
-    PDFPageViewController.new(page)
+    PDFPageViewController.alloc.initWithPage(page)
   end
 
 end

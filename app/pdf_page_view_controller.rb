@@ -1,12 +1,14 @@
 class PDFPageViewController < UIViewController
   
-  def initialize(page)
+  def initWithPage(page)
+    initWithNibName nil, bundle: nil
     @page = page
+    self
   end
 
   def loadView
     super
-    self.view = PDFPageView.new(@page).initWithFrame UIScreen.mainScreen.bounds
+    self.view = PDFPageView.alloc.initWithPage(@page)
   end
 
 end
@@ -14,8 +16,10 @@ end
 
 class PDFPageView < UIView
 
-  def initialize(page)
+  def initWithPage(page)
+    initWithFrame UIScreen.mainScreen.bounds
     @page = page
+    self
   end
 
   def drawRect(rect)
